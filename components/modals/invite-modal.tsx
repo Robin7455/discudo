@@ -64,14 +64,19 @@ export const InviteModal = () => {
         `/api/servers/${server?.id}/invite-code`
       );
       onOpen("invite", { server: response.data });
+      window.location.reload();
     } catch (error) {
     } finally {
       setIsLoading(false);
     }
   };
 
+  const onClosehandler = () => {
+    onClose();
+    window.location.reload();
+  };
   return (
-    <Dialog open={isModalOpen} onOpenChange={onClose}>
+    <Dialog open={isModalOpen} onOpenChange={onClosehandler}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
