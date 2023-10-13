@@ -39,6 +39,7 @@ import qs from "query-string";
 import { MemberRole } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ActionTooltip } from "../action-tooltip";
 export const MembersModal = () => {
   const { isOpen, onOpen, onClose, type, data } = useModal();
   const [loadingId, setLoadingId] = useState("");
@@ -114,7 +115,9 @@ export const MembersModal = () => {
                 <div className="flex flex-col gap-y-1 ">
                   <div className="text-sm font-semibold flex items-center gap-x-1">
                     {member.profile.name}
-                    {roleIconMap[member.role]}
+                    <ActionTooltip label={member.role} side="top">
+                      {roleIconMap[member.role]}
+                    </ActionTooltip>
                   </div>
                   <p className="text-xs text-zinc-500">
                     {member.profile.email}

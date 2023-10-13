@@ -8,9 +8,11 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { useModal } from "@/hooks/use-modal-store";
 import { Search } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { ActionTooltip } from "../action-tooltip";
 
 interface ServerSearchProps {
   data: {
@@ -28,6 +30,7 @@ interface ServerSearchProps {
 
 const ServerSearch = ({ data }: ServerSearchProps) => {
   const [open, setOpen] = useState(false);
+
   const params = useParams();
   const router = useRouter();
   useEffect(() => {
@@ -63,7 +66,7 @@ const ServerSearch = ({ data }: ServerSearchProps) => {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="group  px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition "
+        className="group  px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition  "
       >
         <Search className="w-4 h-4 text-zinc-500 dark:text-zinc-400 " />
         <p className="font-semibold text-sm text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition">
@@ -87,8 +90,8 @@ const ServerSearch = ({ data }: ServerSearchProps) => {
                       onSelect={() => onClick({ id, type })}
                       key={id}
                     >
-                      {icon}
                       <span>{name}</span>
+                      {icon}
                     </CommandItem>
                   );
                 })}
