@@ -29,7 +29,7 @@ export const roleIconMap = {
 interface ServerSidebarProps {
   serverId: string;
 }
-const SeverSidebar = async ({ serverId }: ServerSidebarProps) => {
+export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
   const profile = await currentProfile();
   if (!profile) return redirect("/");
 
@@ -68,11 +68,14 @@ const SeverSidebar = async ({ serverId }: ServerSidebarProps) => {
     (channel) => channel.type === ChannelType.AUDIO
   );
 
-  const members = server?.members.filter((member) => member.id !== profile.id);
+  const members = server?.members.filter(
+    (member) => member.profileId !== profile.id
+  );
 
   const role = server.members.find(
     (member) => member.profileId === profile.id
   )?.role;
+
   return (
     <div className="flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5] ">
       <ServerHeader server={server} role={role} />
@@ -202,5 +205,3 @@ const SeverSidebar = async ({ serverId }: ServerSidebarProps) => {
     </div>
   );
 };
-
-export default SeverSidebar;
