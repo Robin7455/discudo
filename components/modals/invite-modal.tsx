@@ -64,7 +64,7 @@ export const InviteModal = () => {
         `/api/servers/${server?.id}/invite-code`
       );
       onOpen("invite", { server: response.data });
-      window.location.reload();
+
     } catch (error) {
     } finally {
       setIsLoading(false);
@@ -73,7 +73,7 @@ export const InviteModal = () => {
 
   const onClosehandler = () => {
     onClose();
-    window.location.reload();
+
   };
   return (
     <Dialog open={isModalOpen} onOpenChange={onClosehandler}>
