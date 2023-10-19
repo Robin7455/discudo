@@ -21,6 +21,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import { useRouter, useParams } from "next/navigation";
 interface ChatItemProps {
   id: string;
+  type: "channel" | "conversation";
   content: string;
   member: Member & {
     profile: Profile;
@@ -47,6 +48,7 @@ const formSchema = z.object({
 
 export const ChatItem = ({
   id,
+  type,
   fileUrl,
   member,
   timestamp,
@@ -61,7 +63,9 @@ export const ChatItem = ({
   const isAdmin = currentMember.role === MemberRole.ADMIN;
   const isModerator = currentMember.role === MemberRole.MODERATOR;
   const isOwner = currentMember.id === member.id;
-  const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
+  const canDeleteMessage =
+    !deleted &&
+    (type === "channel" ? isAdmin || isModerator || isOwner : isOwner);
   const canEditMessage = !deleted && isOwner && !fileUrl;
   const isPDF = fileType === "pdf" && fileUrl;
   const isImage = !isPDF && fileUrl;

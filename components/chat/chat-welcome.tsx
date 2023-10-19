@@ -1,11 +1,13 @@
 "use client";
 
 import { Hash } from "lucide-react";
+import UserAvatar from "../user-avatar";
 
 interface ChatWelcomeProps {
   type: "channel" | "conversation";
   name: string;
 }
+
 export const ChatWelcome = ({ name, type }: ChatWelcomeProps) => {
   return (
     <div className="space-y-2 px-4 mb-4">
@@ -23,11 +25,6 @@ export const ChatWelcome = ({ name, type }: ChatWelcomeProps) => {
           ? `This is the start of the #${name} channel`
           : `This is the start of your conversation with ${name}`}
       </p>
-      {type === "conversation" && (
-        <div className="h-[75px] w-[75px] rounded-full bg-zinc-500 dark:bg-zinc-700 flex items-center justify-center ">
-          <Hash className="h-12 w-12 text-white" />
-        </div>
-      )}
     </div>
   );
 };
